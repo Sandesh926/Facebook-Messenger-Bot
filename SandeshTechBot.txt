@@ -8,7 +8,7 @@ from pymessenger import Bot
 #assiging flask object to a app variable
 app = Flask(__name__)
 
-VERIFY_TOKEN ="EAAMAnKabX3MBAFRgBJRFjex72XTuuPB1vsV0ssIYJ87wzakGtz160yTrTWM8asadzHYS72g12AsyHwdClQCFy1L8QOCDD8XUsgieGZAR2UyFTQzMsGZAkWOFWgFmc5lYWGdnA3sfwiXKCjCSGYk6RZBWxWvbBB2buec8jl2W7xrrPIdHC2W"
+VERIFY_TOKEN ="Access_Required"
 PAGE_ACESS_TOKEN ="SandeshTech"
 bot = Bot(PAGE_ACESS_TOKEN)
 
