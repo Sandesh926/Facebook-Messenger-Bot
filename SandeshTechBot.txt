@@ -1,0 +1,52 @@
+#importing Flask libraries 
+from tkinter import E
+from urllib import request, response
+from flask import Flask
+import requests
+from pymessenger import Bot
+
+#assiging flask object to a app variable
+app = Flask(__name__)
+
+VERIFY_TOKEN ="EAAMAnKabX3MBAFRgBJRFjex72XTuuPB1vsV0ssIYJ87wzakGtz160yTrTWM8asadzHYS72g12AsyHwdClQCFy1L8QOCDD8XUsgieGZAR2UyFTQzMsGZAkWOFWgFmc5lYWGdnA3sfwiXKCjCSGYk6RZBWxWvbBB2buec8jl2W7xrrPIdHC2W"
+PAGE_ACESS_TOKEN ="SandeshTech"
+bot = Bot(PAGE_ACESS_TOKEN)
+
+@app.route("/",methods=["POST","GET"])
+
+def handling_message(text):
+    adjusted_mssg  = text
+    if adjusted_mssg == "hi" or adjusted_mssg == "Hi":
+        response = "Hello"
+    elif adjusted_mssg == "what's up" or adjusted_mssg == "What's up":
+        response = "I  m fine"
+
+    else:
+        response = "thank you you for respond."
+    return response
+
+@app.route("/",methods=["POST","GET"])
+
+
+def web_hoook():
+    if requests.method == "GET":
+        if requests.args.get('hub.verify_token') == VERIFY_TOKEN:
+            return requests.args.get('hub.challenge')
+        else:
+            return "Unable to connect to FB"
+    elif request.method == 'POST':
+        data = request.json
+        process = data['entry'][0]['messaging']
+        for msg in process:
+            text = msg['message']['text']
+            sender_id = msg['sender']['id']
+            response = handling_message(text)
+            bot.send_text_message(sender_id,response)
+        
+    else:
+        return "its fine"
+
+#App running methods
+if __name__ == '__main__':
+        app.run()
+
